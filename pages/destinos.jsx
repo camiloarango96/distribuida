@@ -20,6 +20,7 @@ export default function PaginaDestinos(props) {
 			.then((res) => {
 				const data = res.data.items;
 				data.forEach((element) => {
+					console.log(element.fields);
 					setDestinos((old) => [...old, element.fields]);
 				});
 			});
@@ -34,9 +35,9 @@ export default function PaginaDestinos(props) {
 
 	const CargaDestinos = () => {
 		if (destinos.length == 0) {
-			return <h1>Cargando destinos ...</h1>;
+			return <h1 className="text-lg font-bold">Cargando destinos ...</h1>;
 		}
-		return <h1>Destinos</h1>;
+		return <h1 className="text-lg font-bold">Destinos</h1>;
 	};
 
 	return (
@@ -45,7 +46,7 @@ export default function PaginaDestinos(props) {
 			<header className="mt-16 w-full h-full flex flex-col items-center">
 				<CargaDestinos />
 			</header>
-			<main className="flex flex-col w-full h-full mt-5">
+			<main className="flex flex-col w-full h-full mt-2 lg:px-20 xl:px-60">
 				{destinos.map((element, key) => {
 					return <InfoVuelo key={key} {...element}></InfoVuelo>;
 				})}

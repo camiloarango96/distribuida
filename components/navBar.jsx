@@ -6,7 +6,7 @@ export default function NavBar() {
 	return (
 		<div className="w-full flex mt-8 font-bold justify-center">
 			<div className="w-full flex flex-row justify-between align-middle">
-					<Logo />
+				<Logo />
 				<div className="flex flex-row md:space-x-4">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,10 @@ export default function NavBar() {
 						</span>
 					</Link>
 					<Link href="#">
-						<span onClick={signOut} className="hidden md:flex font-normal cursor-pointer">
+						<span
+							onClick={signOut}
+							className="hidden md:flex font-normal cursor-pointer"
+						>
 							Salir
 						</span>
 					</Link>
@@ -36,13 +39,10 @@ export default function NavBar() {
 	);
 }
 
-
-
 async function signOut() {
-    try {
-        await Auth.signOut();
-		
-    } catch (error) {
-        console.log('error signing out: ', error);
-    }
+	try {
+		await Auth.signOut();
+	} catch (error) {
+		console.log('error signing out: ', error);
+	}
 }

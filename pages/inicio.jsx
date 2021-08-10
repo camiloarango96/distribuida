@@ -6,15 +6,9 @@ import {
 } from '../components/button.jsx';
 import AdvertisingInicio from '../components/advertisingInicio.jsx';
 
-import { useState, useEffect } from 'react'
-import { Auth } from 'aws-amplify'
-import { useRouter } from 'next/router'
-
-
- 
-
-
-
+import { useState, useEffect } from 'react';
+import { Auth } from 'aws-amplify';
+import { useRouter } from 'next/router';
 
 const infoInicio = [
 	{
@@ -44,15 +38,15 @@ const infoInicio = [
 ];
 
 export default function Inicio() {
-	const [user, setUser] = useState(null)
-	const router = useRouter()
+	const [user, setUser] = useState(null);
+	const router = useRouter();
 	useEffect(() => {
-	  Auth.currentAuthenticatedUser()
-		.then(user => setUser(user))
-		// if there is no authenticated user, redirect to profile page
-		.catch(() => router.push('/'))
-	}, [])
-	if (!user) return null
+		Auth.currentAuthenticatedUser()
+			.then((user) => setUser(user))
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
+	}, []);
+	if (!user) return null;
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col">
 			<NavBar />
@@ -72,7 +66,7 @@ export default function Inicio() {
 					<PrimaryButton text="Ver Destinos" />
 				</div>
 			</header>
-			<main className="flex flex-col w-full h-full mt-5">
+			<main className="flex flex-col w-full h-full mt-5 md:flex-row md:space-x-8 md:h-2/4">
 				{infoInicio.map((content, i) => {
 					return <AdvertisingInicio {...content} key={i} />;
 				})}

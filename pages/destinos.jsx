@@ -3,6 +3,7 @@ import NavBar from '../components/navBar';
 var contentful = require('contentful');
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import InfoVuelo from '../components/infoVuelo.jsx';
 
 export default function PaginaDestinos(props) {
 	const [destinos, setDestinos] = useState([]);
@@ -13,7 +14,6 @@ export default function PaginaDestinos(props) {
 				'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&items'
 			)
 			.then((res) => {
-				console.log(res.data.items);
 				const data = res.data.items;
 				data.forEach((element) => {
 					setDestinos((old) => [...old, element.fields]);
@@ -25,9 +25,6 @@ export default function PaginaDestinos(props) {
 		if (destinos.length == 0) {
 			return <h1>Cargando destinos ...</h1>;
 		}
-		destinos.forEach((element, key) => {
-			console.log(`destino numero ${key} = ${element}`);
-		});
 		return <h1>Destinos</h1>;
 	};
 
@@ -36,9 +33,12 @@ export default function PaginaDestinos(props) {
 			<NavBar />
 			<header className="mt-16 w-full h-full flex flex-col items-center">
 				<CargaDestinos />
-				hola destinos
 			</header>
-			<main className="flex flex-col w-full h-full mt-5"></main>
+			<main className="flex flex-col w-full h-full mt-5">
+				{destinos.map((element, key) => {
+					return <InfoVuelo key={key} {...element}></InfoVuelo>;
+				})}
+			</main>
 		</div>
 	);
 }

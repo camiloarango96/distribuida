@@ -1,5 +1,6 @@
 import Logo from './logo';
 import Link from 'next/link';
+import { Auth } from 'aws-amplify';
 
 export default function NavBar() {
 	return (
@@ -24,9 +25,24 @@ export default function NavBar() {
 							Destinos
 						</span>
 					</Link>
-					<span className="hidden md:flex font-normal">Salir</span>
+					<Link href="#">
+						<span onClick={signOut} className="hidden md:flex font-normal cursor-pointer">
+							Salir
+						</span>
+					</Link>
 				</div>
 			</div>
 		</div>
 	);
+}
+
+
+
+async function signOut() {
+    try {
+        await Auth.signOut();
+		
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
 }

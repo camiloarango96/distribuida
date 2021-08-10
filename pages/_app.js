@@ -2,12 +2,12 @@ import '../styles/globals.css'
 import Amplify from "aws-amplify";
 //import awsExports from "./aws-exports";
 Amplify.configure({"aws_project_region": "us-east-2",
-"aws_cognito_identity_pool_id": "us-east-2:1a3a20b0-d6b6-43a3-b026-832b6909616f",
+"aws_cognito_identity_pool_id": "us-east-2:ccbd0fcb-1b1b-4183-950f-4eaf5d0888ff",
 "aws_cognito_region": "us-east-2",
-"aws_user_pools_id": "us-east-2_UXk6amqBF",
-"aws_user_pools_web_client_id": "38he0t16ctkua89ho905h11ba8",
+"aws_user_pools_id": "us-east-2_H5fKcGZdd",
+"aws_user_pools_web_client_id": "7a2j5ksrr12cqudc4htdvfii3d",
 "oauth": {
-    "domain": "reactamplified0b25817c-0b25817c-dev.auth.us-east-2.amazoncognito.com",
+    "domain": "myappbf61d131-bf61d131-dev.auth.us-east-2.amazoncognito.com",
     "scope": [
         "phone",
         "email",
@@ -33,7 +33,8 @@ Amplify.configure({"aws_project_region": "us-east-2",
 "aws_cognito_password_protection_settings": {
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": []
-}});
+}
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

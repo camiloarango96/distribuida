@@ -4,9 +4,13 @@ var contentful = require('contentful');
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import InfoVuelo from '../components/infoVuelo.jsx';
+import { Auth } from 'aws-amplify';
+import { useRouter } from 'next/router';
 
 export default function PaginaDestinos(props) {
 	const [destinos, setDestinos] = useState([]);
+	const [user, setUser] = useState(null);
+	const router = useRouter();
 
 	useEffect(() => {
 		axios
@@ -19,7 +23,14 @@ export default function PaginaDestinos(props) {
 					setDestinos((old) => [...old, element.fields]);
 				});
 			});
+
+		Auth.currentAuthenticatedUser()
+			.then((user) => setUser(user))
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
 	}, []);
+
+	if (!user) return null;
 
 	const CargaDestinos = () => {
 		if (destinos.length == 0) {

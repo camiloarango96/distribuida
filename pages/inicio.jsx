@@ -38,15 +38,15 @@ const infoInicio = [
 ];
 
 export default function Inicio() {
-	const [user, setUser] = useState(null);
-	const router = useRouter();
-	useEffect(() => {
-		Auth.currentAuthenticatedUser()
-			.then((user) => setUser(user))
-			// if there is no authenticated user, redirect to profile page
-			.catch(() => router.push('/'));
-	}, []);
-	if (!user) return null;
+	// const [user, setUser] = useState(null);
+	// const router = useRouter();
+	// useEffect(() => {
+	// 	Auth.currentAuthenticatedUser()
+	// 		.then((user) => setUser(user))
+	// 		// if there is no authenticated user, redirect to profile page
+	// 		.catch(() => router.push('/'));
+	// }, []);
+	// if (!user) return null;
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col">
 			<NavBar />

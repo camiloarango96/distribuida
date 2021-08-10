@@ -1,5 +1,6 @@
-import '../styles/globals.css'
-import Amplify from "aws-amplify";
+import '../styles/globals.css';
+import Amplify from 'aws-amplify';
+import 'tailwindcss/tailwind.css';
 //import awsExports from "./aws-exports";
 Amplify.configure({"aws_project_region": "us-east-2",
 "aws_cognito_identity_pool_id": "us-east-2:ccbd0fcb-1b1b-4183-950f-4eaf5d0888ff",
@@ -40,9 +41,8 @@ Amplify.configure({"aws_project_region": "us-east-2",
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
-
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+	return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;

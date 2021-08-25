@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
-import { useSession } from 'next-auth/client';
+// import { useSession } from 'next-auth/client';
 
 const infoInicio = [
 	{
@@ -42,7 +42,7 @@ const infoInicio = [
 
 export default function Inicio() {
 	const [user, setUser] = useState(null);
-	const [session, loading] = useSession();
+	// const [session, loading] = useSession();
 
 	const router = useRouter();
 
@@ -55,7 +55,7 @@ export default function Inicio() {
 
 	if (!user) return null;
 
-	console.log(session);
+	console.log(user);
 
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col pb-40">

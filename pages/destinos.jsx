@@ -1,6 +1,4 @@
-// import contentful from 'contentful';
 import NavBar from '../components/navBar';
-var contentful = require('contentful');
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import InfoVuelo from '../components/infoVuelo.jsx';

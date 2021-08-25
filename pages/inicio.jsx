@@ -8,8 +8,9 @@ import AdvertisingInicio from '../components/advertisingInicio.jsx';
 
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
-import router, { useRouter } from 'next/router';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import { useSession } from 'next-auth/client';
 
 const infoInicio = [
 	{
@@ -41,16 +42,23 @@ const infoInicio = [
 
 export default function Inicio() {
 	const [user, setUser] = useState(null);
+	const [session, loading] = useSession();
+
 	const router = useRouter();
+
 	useEffect(() => {
 		Auth.currentAuthenticatedUser()
 			.then((user) => setUser(user))
 			// if there is no authenticated user, redirect to profile page
 			.catch(() => router.push('/'));
 	}, []);
+
 	if (!user) return null;
+
+	console.log(session);
+
 	return (
-		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col">
+		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col pb-40">
 			<NavBar />
 			<header className="mt-16">
 				<div className="px-6 lg:px-60">

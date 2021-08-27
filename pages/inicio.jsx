@@ -6,47 +6,55 @@ import {
 } from '../components/button.jsx';
 import AdvertisingInicio from '../components/advertisingInicio.jsx';
 
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
-// import { useSession } from 'next-auth/client';
-
-const infoInicio = [
-	{
-		imagen: {
-			src: 'https://distribuida.s3.us-east-2.amazonaws.com/img/ciudad.jpeg',
-			alt: 'Miami City',
-		},
-		content: 'Ponle a tus dias una dosis de diversion en las calles de Miami',
-		price: '152 USD',
-	},
-	{
-		imagen: {
-			src: 'https://distribuida.s3.us-east-2.amazonaws.com/img/dubai.jpeg',
-			alt: 'Miami City',
-		},
-		content: 'Ponle a tus dias una dosis de diversion en las calles de Dubai',
-		price: '1252 USD',
-	},
-	{
-		imagen: {
-			src: 'https://distribuida.s3.us-east-2.amazonaws.com/img/puente.jpeg',
-			alt: 'Miami City',
-		},
-		content:
-			'Ponle a tus dias una dosis de diversion en las calles de Shangrila',
-		price: '152 USD',
-	},
-];
-
 export default function Inicio() {
 	const [user, setUser] = useState(null);
-	// const [session, loading] = useSession();
+	const [msjBienvenida, setMsjBienvenida] = useState('');
+	const [boton, setBoton] = useState('');
+	const [subtitulo, setSubtitulo] = useState('');
+	const [infoInicio, setInfoInicio] = useState([]);
 
 	const router = useRouter();
 
 	useEffect(() => {
+		//contenfull api call
+		axios
+			.get(
+				'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&content_type=bienvenida'
+			)
+			.then((res) => {
+				// console.log(res);
+				const data = res.data.items[0].fields;
+				setMsjBienvenida(data.msjBienvenida);
+				setBoton(data.boton);
+				setSubtitulo(data.subtitulo);
+			});
+
+		axios
+			.get(
+				'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&content_type=boxes'
+			)
+			.then((res) => {
+				const assets = res.data.includes.Asset;
+				const data = res.data.items;
+				data.forEach((element, index) => {
+					setInfoInicio((old) => [
+						...old,
+						{
+							imagen: {
+								src: `https:${assets[index].fields.file.url}`,
+								alt: assets[index].fields.title,
+							},
+							content: element.fields.desc2,
+							price: element.fields.texto2,
+						},
+					]);
+				});
+			});
 		Auth.currentAuthenticatedUser()
 			.then((user) => setUser(user))
 			// if there is no authenticated user, redirect to profile page
@@ -55,26 +63,23 @@ export default function Inicio() {
 
 	if (!user) return null;
 
-	console.log(user);
-
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col pb-40">
 			<NavBar />
 			<header className="mt-16">
 				<div className="px-6 lg:px-60">
 					<h1 className="text-center text-2xl font-bold lg:text-5xl">
-						Vivir viajando nunca fue tan facil.
+						{msjBienvenida}
 					</h1>
 				</div>
 				<div className="mt-4 px-6 lg:px-48">
 					<h6 className="text-center text-sm text-gray-500 lg:text-2xl">
-						Programa tus proximas vacaciones con nosotros. Con destinos desde
-						99.900
+						{subtitulo}
 					</h6>
 				</div>
 				<div className="flex flex-row justify-center w-full mt-8">
 					<PrimaryButton
-						text="Ver Destinos"
+						text={boton}
 						onclick={() => router.push('/destinos')}
 					/>
 				</div>

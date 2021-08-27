@@ -13,12 +13,12 @@ export default function PaginaDestinos(props) {
 	useEffect(() => {
 		axios
 			.get(
-				'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&items'
+				// 'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&content_type=bienvenida'
+				'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&content_type=vuelo'
 			)
 			.then((res) => {
 				const data = res.data.items;
 				data.forEach((element) => {
-					console.log(element.fields);
 					setDestinos((old) => [...old, element.fields]);
 				});
 			});

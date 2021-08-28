@@ -4,9 +4,11 @@ import axios from 'axios';
 const newAxios = axios.create({
 	mode: 'cors',
 	headers: {
+		'Access-Control-Allow-Origin': '*',
 		'Content-Type': 'application/json',
-		'Access-Control-Allow-Origin': '*',
-		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Expose-Headers': '*',
+        'Access-Control-Allow-Headers': '*',
+		
 	},
 });
 
@@ -24,7 +26,7 @@ export function addCart(obj) {
 
 export function getPrecio(id) {
 	newAxios
-		.get('https://htqquni9q7.execute-api.us-east-2.amazonaws.com/getprecio', {
+		.post('https://htqquni9q7.execute-api.us-east-2.amazonaws.com/getprecio', {
 			id,
 		})
 		.then((res) => console.log(res))

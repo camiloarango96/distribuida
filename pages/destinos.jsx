@@ -18,18 +18,21 @@ export default function PaginaDestinos(props) {
 			)
 			.then((res) => {
 				const data = res.data.items;
+				let id;
+				let vuelo;
 				data.forEach((element) => {
-					setDestinos((old) => [...old, element.fields]);
+					vuelo = { ...element.fields, id: element.sys.id };
+					setDestinos((old) => [...old, vuelo]);
 				});
 			});
 
-		Auth.currentAuthenticatedUser()
-			.then((user) => setUser(user))
-			// if there is no authenticated user, redirect to profile page
-			.catch(() => router.push('/'));
+		// Auth.currentAuthenticatedUser()
+		// 	.then((user) => setUser(user))
+		// 	// if there is no authenticated user, redirect to profile page
+		// 	.catch(() => router.push('/'));
 	}, []);
 
-	if (!user) return null;
+	// if (!user) return null;
 
 	const CargaDestinos = () => {
 		if (destinos.length == 0) {

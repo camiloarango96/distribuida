@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PrimaryButton } from './button';
-import addCart from '../logic/addToCart';
+import { addCart, getPrecio } from '../logic/addToCart';
 
 export default function InfoVuelo({
-	Destino,
-	Origen,
-	descripcion,
+	destino,
+	origen,
+	description,
 	fechallegada,
 	fechasalida,
 	numerovuelo,
-	precio,
+	id,
 }) {
 	const [show, setShow] = useState(false);
 	const [amount, setAmount] = useState(0);
+	const [precio, setPrecio] = useState(0);
 
 	const departureDate = new Date(fechasalida);
 	const arrivalDate = new Date(fechallegada);
@@ -22,6 +23,10 @@ export default function InfoVuelo({
 	const getTimeInfo = (fecha) => {
 		return `${fecha.getHours()}:${fecha.getMinutes()}`;
 	};
+
+	useEffect(() => {
+		getPrecio(id);
+	}, []);
 
 	const Cantidad = () => {
 		return (
@@ -82,16 +87,16 @@ export default function InfoVuelo({
 				<div className="flex felx-row w-full h-50 bg-gray-100  mt-10 px-5 py-5 justify-between rounded-t-lg ">
 					<div className="flex flex-col items-start">
 						<h1>{getDateInfo(departureDate)}</h1>
-						<h1>{Origen}</h1>
+						<h1>{origen}</h1>
 						<h1>{getTimeInfo(departureDate)}</h1>
 					</div>
 					<div className=" flex flex-col items-center">
 						<h1>{numerovuelo}</h1>
-						<h1>{descripcion}</h1>
+						<h1>{description}</h1>
 					</div>
 					<div className="flex flex-col items-end">
 						<h1>{getDateInfo(arrivalDate)}</h1>
-						<h1 className="">{Destino}</h1>
+						<h1 className="">{destino}</h1>
 
 						<h1>{getTimeInfo(arrivalDate)}</h1>
 					</div>

@@ -1,9 +1,9 @@
 import NavBar from '../components/navBar';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import InfoVuelo from '../components/infoVuelo.jsx';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { getVuelos } from '../logic/apiCalls';
 
 export default function PaginaDestinos(props) {
 	const [destinos, setDestinos] = useState([]);
@@ -11,21 +11,35 @@ export default function PaginaDestinos(props) {
 	const router = useRouter();
 
 	useEffect(() => {
-		axios
-			.get(
-				// 'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&content_type=bienvenida'
-				'https://cdn.contentful.com/spaces/kf1rglx1u1m4/entries?access_token=DE4hnN1-JrVaXr77_34OLFjPGzwdqwKl4govapaiIyI&content_type=vuelo'
-			)
-			.then((res) => {
-				const data = res.data.items;
-				let id;
-				let vuelo;
-				data.forEach((element) => {
-					vuelo = { ...element.fields, id: element.sys.id };
-					setDestinos((old) => [...old, vuelo]);
-				});
+		const vuelos = async () => {
+			const data = await getVuelos();
+			data.forEach((element) => {
+				let {
+					destino,
+					origen,
+					descripcion: description,
+					fecha_llegada: fechallegada,
+					fecha_salida: fechasalida,
+					numero_reserva: numerovuelo,
+					id,
+					precio,
+				} = { ...element };
+				let vuelo = {
+					destino,
+					origen,
+					description,
+					fechallegada,
+					fechasalida,
+					numerovuelo,
+					id,
+					precio,
+				};
+				console.log('vuelo', vuelo);
+				setDestinos((old) => [...old, vuelo]);
 			});
+		};
 
+		vuelos();
 		// Auth.currentAuthenticatedUser()
 		// 	.then((user) => setUser(user))
 		// 	// if there is no authenticated user, redirect to profile page

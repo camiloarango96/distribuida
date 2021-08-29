@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PrimaryButton } from './button';
-import { addCart, getPrecio } from '../logic/addToCart';
+import { addCart, getPrecio } from '../logic/apiCalls';
 
 export default function InfoVuelo({
 	destino,
@@ -10,10 +10,10 @@ export default function InfoVuelo({
 	fechasalida,
 	numerovuelo,
 	id,
+	precio,
 }) {
 	const [show, setShow] = useState(false);
 	const [amount, setAmount] = useState(0);
-	const [precio, setPrecio] = useState(0);
 
 	const departureDate = new Date(fechasalida);
 	const arrivalDate = new Date(fechallegada);
@@ -23,10 +23,6 @@ export default function InfoVuelo({
 	const getTimeInfo = (fecha) => {
 		return `${fecha.getHours()}:${fecha.getMinutes()}`;
 	};
-
-	useEffect(() => {
-		getPrecio(id);
-	}, []);
 
 	const Cantidad = () => {
 		return (

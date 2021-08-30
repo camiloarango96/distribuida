@@ -8,7 +8,7 @@ const newAxios = axios.create({
 		'Access-Control-Allow-Headers': '*',
 		'Access-Control-Allow-Origin': '*',
 		Accept: '*/*',
-		authentication: true,
+		// authentication: true,
 	},
 });
 
@@ -24,7 +24,7 @@ export async function addCart({ cantidad, id_vuelo, email_usuario }) {
 	);
 	// .then((res) => console.log(res))
 	// .catch((err) => console.log(err));
-
+	console.log(status);
 	return status.status;
 }
 

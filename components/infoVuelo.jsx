@@ -30,16 +30,16 @@ export default function InfoVuelo({
 	};
 
 	useEffect(() => {
-		// Auth.currentAuthenticatedUser()
-		// 	.then((user) => setUser(user))
-		// 	// if there is no authenticated user, redirect to profile page
-		// 	.catch(() => router.push('/'));
+		Auth.currentAuthenticatedUser()
+			.then((user) => setUser(user))
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
 	}, []);
 
-	// if (!user) return null;
+	if (!user) return null;
 
-	// let email_usuario = user.attributes.email;
-	let email_usuario = 'mateoarteagagiraldo@gmail.com';
+	let email_usuario = user.attributes.email;
+	// let email_usuario = 'mateoarteagagiraldo@gmail.com';
 
 	const Cantidad = () => {
 		return (

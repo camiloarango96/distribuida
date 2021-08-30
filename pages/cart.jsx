@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getCart } from '../logic/apiCalls';
-
+import { Auth } from 'aws-amplify';
 import NavBar from '../components/navBar';
 import CantidadCarrito from '../components/cantidadCarrito';
 import InfoVuelo from '../components/infoVuelo';
@@ -8,10 +8,20 @@ import Tiquete from '../components/tickete';
 
 export default function Cart() {
 	const [items, setItems] = useState([]);
+	const [user, setUser] = useState(null);
 
 	useEffect(() => {
+		Auth.currentAuthenticatedUser()
+			.then((user) => setUser(user))
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
+		if (user) {
+			let email_usuario = user.attributes.email;
+			apiCart();
+		}
+
 		const apiCart = async () => {
-			const data = await getCart('mateoarteagagiraldo@gmail.com');
+			const data = await getCart(email_usuario);
 			data.data.forEach((element) => {
 				let {
 					destino,
@@ -38,9 +48,11 @@ export default function Cart() {
 				setItems((old) => [...old, tiquete]);
 			});
 		};
-
-		apiCart();
 	}, []);
+
+	if (!user) return null;
+
+	// let email_usuario = user.attributes.email;
 
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col">

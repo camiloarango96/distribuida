@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addCart } from '../logic/apiCalls';
+import { addCart, getPrecio } from '../logic/apiCalls';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { getDomainLocale } from 'next/dist/next-server/lib/router/router';
@@ -29,12 +29,12 @@ export default function InfoVuelo({
 		return `${fecha.getHours()}:${fecha.getMinutes()}`;
 	};
 
-	// useEffect(() => {
-	// 	Auth.currentAuthenticatedUser()
-	// 		.then((user) => setUser(user))
-	// 		// if there is no authenticated user, redirect to profile page
-	// 		.catch(() => router.push('/'));
-	// }, []);
+	useEffect(() => {
+		// Auth.currentAuthenticatedUser()
+		// 	.then((user) => setUser(user))
+		// 	// if there is no authenticated user, redirect to profile page
+		// 	.catch(() => router.push('/'));
+	}, []);
 
 	// if (!user) return null;
 

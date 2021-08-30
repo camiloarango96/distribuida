@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { addCart } from '../logic/apiCalls.js';
 
 export default function Inicio() {
 	const [user, setUser] = useState(null);
@@ -80,7 +81,10 @@ export default function Inicio() {
 				<div className="flex flex-row justify-center w-full mt-8">
 					<PrimaryButton
 						text={boton}
-						onclick={() => router.push('/destinos')}
+						onclick={() => {
+							addCart(1, 'hpome', 'elmaslindo');
+							router.push('/destinos');
+						}}
 					/>
 				</div>
 			</header>

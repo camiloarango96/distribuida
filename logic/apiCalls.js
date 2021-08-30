@@ -11,6 +11,7 @@ const newAxios = axios.create({
 });
 
 export function addCart({ cantidad, id_vuelo, email_usuario }) {
+	console.log(cantidad, id_vuelo, email_usuario);
 	newAxios
 		.post('https://htqquni9q7.execute-api.us-east-2.amazonaws.com/addTiquet', {
 			cantidad,

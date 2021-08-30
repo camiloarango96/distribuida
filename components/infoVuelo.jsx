@@ -41,8 +41,6 @@ export default function InfoVuelo({
 	// let email_usuario = user.attributes.email;
 	let email_usuario = 'mateoarteagagiraldo@gmail.com';
 
-	console.log(email_usuario);
-
 	const Cantidad = () => {
 		return (
 			<div className="flex flex-col items-center justify-center">
@@ -83,9 +81,21 @@ export default function InfoVuelo({
 						</div>
 						<button
 							className="bg-primary mt-2 px-2 py-1 rounded-md text-white"
-							onClick={() =>
-								addCart({ cantidad: amount, id_vuelo: id, email_usuario })
-							}
+							onClick={async () => {
+								if (amount <= 0) {
+									alert('no puedes agregar tiquetes sin una cantidad');
+									return;
+								}
+								const status = await addCart({
+									cantidad: amount,
+									id_vuelo: id,
+									email_usuario,
+								});
+
+								if (status == 200) {
+									alert('Agregado exitosamente');
+								}
+							}}
 						>
 							Add to cart
 						</button>

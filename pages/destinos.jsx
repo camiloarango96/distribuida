@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import InfoVuelo from '../components/infoVuelo.jsx';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { getVuelos } from '../logic/apiCalls';
+import { getVuelos, getPrecio } from '../logic/apiCalls';
 
 export default function PaginaDestinos(props) {
 	const [destinos, setDestinos] = useState([]);

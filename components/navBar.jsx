@@ -42,7 +42,7 @@ export default function NavBar() {
 				<Logo />
 				<div className="flex flex-row md:space-x-4 items-center">
 					<div className="flex flex-row md:hidden">
-						<Link href="/cart" passHref={true}>
+						<Link href="/Cart" passHref={true}>
 							<div className="font-normal cursor-pointer">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ export default function NavBar() {
 							Salir
 						</span>
 					</Link>
-					<Link href="/cart" passHref={true}>
+					<Link href="/Cart" passHref={true}>
 						<span className="hidden md:flex font-normal cursor-pointer">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

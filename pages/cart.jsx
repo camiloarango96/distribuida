@@ -5,22 +5,20 @@ import NavBar from '../components/navBar';
 import CantidadCarrito from '../components/cantidadCarrito';
 import InfoVuelo from '../components/infoVuelo';
 import Tiquete from '../components/tickete';
+import { useRouter } from 'next/router';
 
 export default function Cart() {
 	const [items, setItems] = useState([]);
 	const [user, setUser] = useState(null);
+	const router = useRouter();
 
 	useEffect(() => {
 		Auth.currentAuthenticatedUser()
 			.then((user) => setUser(user))
 			// if there is no authenticated user, redirect to profile page
 			.catch(() => router.push('/'));
-		if (user) {
-			let email_usuario = user.attributes.email;
-			apiCart();
-		}
 
-		const apiCart = async () => {
+		const apiCart = async (email_usuario) => {
 			const data = await getCart(email_usuario);
 			data.data.forEach((element) => {
 				let {
@@ -50,7 +48,11 @@ export default function Cart() {
 		};
 	}, []);
 
-	if (!user) return null;
+	if (!user) {
+		return null;
+	} else {
+		apiCart(user.attributes.email);
+	}
 
 	// let email_usuario = user.attributes.email;
 

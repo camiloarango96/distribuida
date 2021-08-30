@@ -20,8 +20,6 @@ export function addCart({ cantidad, id_vuelo, email_usuario }) {
 		})
 		.then((res) => console.log(res))
 		.catch((err) => console.log(err));
-
-	console.log(obj);
 }
 
 export async function getVuelos() {

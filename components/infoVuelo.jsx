@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { addCart } from '../logic/apiCalls';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { getDomainLocale } from 'next/dist/next-server/lib/router/router';
 
 export default function InfoVuelo({
 	destino,
@@ -28,16 +29,18 @@ export default function InfoVuelo({
 		return `${fecha.getHours()}:${fecha.getMinutes()}`;
 	};
 
-	useEffect(() => {
-		Auth.currentAuthenticatedUser()
-			.then((user) => setUser(user))
-			// if there is no authenticated user, redirect to profile page
-			.catch(() => router.push('/'));
-	}, []);
+	// useEffect(() => {
+	// 	Auth.currentAuthenticatedUser()
+	// 		.then((user) => setUser(user))
+	// 		// if there is no authenticated user, redirect to profile page
+	// 		.catch(() => router.push('/'));
+	// }, []);
 
-	if (!user) return null;
+	// if (!user) return null;
 
-	let email_usuario = user.attributes.email;
+	// let email_usuario = user.attributes.email;
+	let email_usuario = 'mateoarteagagiraldo@gmail.com';
+
 	console.log(email_usuario);
 
 	const Cantidad = () => {
@@ -81,7 +84,7 @@ export default function InfoVuelo({
 						<button
 							className="bg-primary mt-2 px-2 py-1 rounded-md text-white"
 							onClick={() =>
-								addCart({ amount: cantidad, id: id_vuelo, email_usuario })
+								addCart({ cantidad: amount, id_vuelo: id, email_usuario })
 							}
 						>
 							Add to cart

@@ -37,7 +37,7 @@ export default function InfoVuelo({
 
 	if (!user) return null;
 
-	console.log(user);
+	let email = user.attributes.email;
 
 	const Cantidad = () => {
 		return (

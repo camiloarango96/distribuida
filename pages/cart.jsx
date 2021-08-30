@@ -12,40 +12,40 @@ export default function Cart() {
 	const [user, setUser] = useState(null);
 	const router = useRouter();
 
+	const apiCart = async (email_usuario) => {
+		const data = await getCart(email_usuario);
+		data.data.forEach((element) => {
+			let {
+				destino,
+				origen,
+				descripcion: description,
+				fecha_llegada: fechallegada,
+				fecha_salida: fechasalida,
+				numero_reserva: numerovuelo,
+				id,
+				precio,
+				cantidad,
+			} = { ...element };
+			let tiquete = {
+				destino,
+				origen,
+				description,
+				fechallegada,
+				fechasalida,
+				numerovuelo,
+				id,
+				precio,
+				cantidad,
+			};
+			setItems((old) => [...old, tiquete]);
+		});
+	};
+
 	useEffect(() => {
 		Auth.currentAuthenticatedUser()
 			.then((user) => setUser(user))
 			// if there is no authenticated user, redirect to profile page
 			.catch(() => router.push('/'));
-
-		const apiCart = async (email_usuario) => {
-			const data = await getCart(email_usuario);
-			data.data.forEach((element) => {
-				let {
-					destino,
-					origen,
-					descripcion: description,
-					fecha_llegada: fechallegada,
-					fecha_salida: fechasalida,
-					numero_reserva: numerovuelo,
-					id,
-					precio,
-					cantidad,
-				} = { ...element };
-				let tiquete = {
-					destino,
-					origen,
-					description,
-					fechallegada,
-					fechasalida,
-					numerovuelo,
-					id,
-					precio,
-					cantidad,
-				};
-				setItems((old) => [...old, tiquete]);
-			});
-		};
 	}, []);
 
 	if (!user) {

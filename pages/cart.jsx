@@ -43,16 +43,15 @@ export default function Cart() {
 
 	useEffect(() => {
 		Auth.currentAuthenticatedUser()
-			.then((user) => setUser(user))
+			.then((user) => {
+				setUser(user);
+				apiCart(user.attributes.email);
+			})
 			// if there is no authenticated user, redirect to profile page
 			.catch(() => router.push('/'));
-
-		if (!user) {
-			return null;
-		} else {
-			apiCart(user.attributes.email);
-		}
 	}, []);
+
+	if (!user) return null;
 
 	// let email_usuario = user.attributes.email;
 

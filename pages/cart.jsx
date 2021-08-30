@@ -46,13 +46,13 @@ export default function Cart() {
 			.then((user) => setUser(user))
 			// if there is no authenticated user, redirect to profile page
 			.catch(() => router.push('/'));
-	}, []);
 
-	if (!user) {
-		return null;
-	} else {
-		apiCart(user.attributes.email);
-	}
+		if (!user) {
+			return null;
+		} else {
+			apiCart(user.attributes.email);
+		}
+	}, []);
 
 	// let email_usuario = user.attributes.email;
 

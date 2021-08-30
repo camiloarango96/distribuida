@@ -37,7 +37,8 @@ export default function InfoVuelo({
 
 	if (!user) return null;
 
-	let email = user.attributes.email;
+	let email_usuario = user.attributes.email;
+	console.log(email_usuario);
 
 	const Cantidad = () => {
 		return (
@@ -79,7 +80,9 @@ export default function InfoVuelo({
 						</div>
 						<button
 							className="bg-primary mt-2 px-2 py-1 rounded-md text-white"
-							onClick={() => addCart({ amount, id, email })}
+							onClick={() =>
+								addCart({ amount: cantidad, id: id_vuelo, email_usuario })
+							}
 						>
 							Add to cart
 						</button>

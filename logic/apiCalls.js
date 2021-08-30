@@ -4,21 +4,21 @@ import axios from 'axios';
 const newAxios = axios.create({
 	mode: 'cors',
 	headers: {
-		// 'Access-Control-Allow-Origin': '*',
 		'Content-Type': 'multipart/form-data',
 		'Access-Control-Expose-Headers': '*',
 		'Access-Control-Allow-Headers': '*',
 	},
 });
 
-// newAxios.defaults.headers['Content-Type'] = 'application/json';
-// newAxios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-
-export function addCart(obj) {
+export function addCart({ cantidad, id_vuelo, email_usuario }) {
 	newAxios
-		.get('https://htqquni9q7.execute-api.us-east-2.amazonaws.com/Prueba1')
+		.post('https://htqquni9q7.execute-api.us-east-2.amazonaws.com/Prueba1', {
+			cantidad,
+			id_vuelo,
+			email_usuario,
+		})
 		.then((res) => console.log(res))
-		.catch((Err) => console.log(Err));
+		.catch((err) => console.log(err));
 
 	console.log(obj);
 }

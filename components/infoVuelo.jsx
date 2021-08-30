@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { PrimaryButton } from './button';
-import { addCart, getPrecio } from '../logic/apiCalls';
+import { addCart } from '../logic/apiCalls';
+import { Auth } from 'aws-amplify';
+import { useRouter } from 'next/router';
 
 export default function InfoVuelo({
 	destino,
@@ -14,6 +15,9 @@ export default function InfoVuelo({
 }) {
 	const [show, setShow] = useState(false);
 	const [amount, setAmount] = useState(0);
+	const [user, setUser] = useState(null);
+
+	const router = useRouter();
 
 	const departureDate = new Date(fechasalida);
 	const arrivalDate = new Date(fechallegada);
@@ -23,6 +27,17 @@ export default function InfoVuelo({
 	const getTimeInfo = (fecha) => {
 		return `${fecha.getHours()}:${fecha.getMinutes()}`;
 	};
+
+	useEffect(() => {
+		Auth.currentAuthenticatedUser()
+			.then((user) => setUser(user))
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
+	}, []);
+
+	if (!user) return null;
+
+	console.log(user);
 
 	const Cantidad = () => {
 		return (
@@ -64,7 +79,7 @@ export default function InfoVuelo({
 						</div>
 						<button
 							className="bg-primary mt-2 px-2 py-1 rounded-md text-white"
-							onClick={() => addCart(amount)}
+							onClick={() => addCart({ amount, id, email })}
 						>
 							Add to cart
 						</button>

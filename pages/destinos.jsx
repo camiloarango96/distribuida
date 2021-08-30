@@ -34,19 +34,18 @@ export default function PaginaDestinos(props) {
 					id,
 					precio,
 				};
-				console.log('vuelo', vuelo);
 				setDestinos((old) => [...old, vuelo]);
 			});
 		};
 
 		vuelos();
-		// Auth.currentAuthenticatedUser()
-		// 	.then((user) => setUser(user))
-		// 	// if there is no authenticated user, redirect to profile page
-		// 	.catch(() => router.push('/'));
+		Auth.currentAuthenticatedUser()
+			.then((user) => setUser(user))
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
 	}, []);
 
-	// if (!user) return null;
+	if (!user) return null;
 
 	const CargaDestinos = () => {
 		if (destinos.length == 0) {

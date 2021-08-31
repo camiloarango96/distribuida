@@ -131,7 +131,7 @@ export default function Tickete({
 						/>
 					</svg>
 					<IrAPagar />
-					<p>Total: {precio * cantidad} USD</p>
+					<p>Total: {precio * amount} USD</p>
 				</div>
 			</div>
 		</div>

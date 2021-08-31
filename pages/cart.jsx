@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify';
 import NavBar from '../components/navBar';
 import CantidadCarrito from '../components/cantidadCarrito';
 import InfoVuelo from '../components/infoVuelo';
-import Tiquete from '../components/tickete';
+import Tiquete from '../components/ticket';
 import { useRouter } from 'next/router';
 
 export default function Cart() {
@@ -42,19 +42,19 @@ export default function Cart() {
 	};
 
 	useEffect(() => {
-		Auth.currentAuthenticatedUser()
-			.then((user) => {
-				setUser(user);
-				apiCart(user.attributes.email);
-			})
-			// if there is no authenticated user, redirect to profile page
-			.catch(() => router.push('/'));
+		// Auth.currentAuthenticatedUser()
+		// 	.then((user) => {
+		// 		setUser(user);
+		// 		apiCart(user.attributes.email);
+		// 	})
+		// 	// if there is no authenticated user, redirect to profile page
+		// 	.catch(() => router.push('/'));
 		apiCart('mateoarteagagiraldo@gmail.com');
 	}, []);
 
-	if (!user) return null;
+	// if (!user) return null;
 
-	let email_usuario = user.attributes.email;
+	// let email_usuario = user.attributes.email;
 
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col">

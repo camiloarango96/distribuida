@@ -22,12 +22,15 @@ export default function NavBar() {
 			<div
 				className={`w-full h-full  ${status} absolute  right-20 top-10 md:hidden`}
 			>
-				<div className="bg-white flex flex-col h-20 px-3 py-2 border border-black rounded-tl-md rounded-b-md space-y-2">
+				<div className="bg-white flex flex-col h-28 px-3 py-2 border border-black rounded-tl-md rounded-b-md space-y-2">
+					<Link href="/repuestos" passHref={true}>
+						<h1 className="text-black font-normal">Respuestos</h1>
+					</Link>
 					<Link href="/destinos" passHref={true}>
-						<h1 className="text-black">Destinos</h1>
+						<h1 className="text-black font-normal">Destinos</h1>
 					</Link>
 					<Link href="#">
-						<h1 className="text-black" onClick={() => signOut()}>
+						<h1 className="text-black font-normal" onClick={() => signOut()}>
 							Salir
 						</h1>
 					</Link>
@@ -80,6 +83,11 @@ export default function NavBar() {
 						</div>
 					</div>
 
+					<Link href="/repuestos" passHref={true}>
+						<span className="hidden md:flex font-normal cursor-pointer">
+							Repuestos
+						</span>
+					</Link>
 					<Link href="/destinos" passHref={true}>
 						<span className="hidden md:flex font-normal cursor-pointer">
 							Destinos

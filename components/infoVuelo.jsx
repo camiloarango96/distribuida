@@ -57,9 +57,9 @@ export default function InfoVuelo({
 			.catch(() => router.push('/'));
 	}, []);
 
-	// if (!user) return null;
+	if (!user) return null;
 
-	let email_usuario = user.attributes.email;
+	// let email_usuario = user.attributes.email;
 	// let email_usuario = 'mateoarteagagiraldo@gmail.com';
 
 	const Cantidad = () => {
@@ -110,7 +110,7 @@ export default function InfoVuelo({
 								const status = await addCart({
 									cantidad: amount,
 									id_vuelo: id,
-									email_usuario,
+									email_usuario: user.attributes.email,
 								});
 
 								if (status == 200) {

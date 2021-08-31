@@ -49,21 +49,22 @@ export default function Cart() {
 			})
 			// if there is no authenticated user, redirect to profile page
 			.catch(() => router.push('/'));
+		apiCart('mateoarteagagiraldo@gmail.com');
 	}, []);
 
 	if (!user) return null;
 
-	// let email_usuario = user.attributes.email;
+	let email_usuario = user.attributes.email;
 
 	return (
 		<div className="flex w-full h-full px-9 md:px-20 xl:px-60 flex-col">
 			<NavBar />
 			<h1>Bienvenidos a cart</h1>
-			<div>
+			<div className="flex flex-col items-center">
 				{items.map((element, key) => {
 					return (
 						<div key={key} className="flex w-full flex-row justify-center">
-							<Tiquete {...element} />
+							<Tiquete key={key} {...element} numero={key} />
 						</div>
 					);
 				})}

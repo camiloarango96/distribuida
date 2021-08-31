@@ -4,6 +4,20 @@ import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { getDomainLocale } from 'next/dist/next-server/lib/router/router';
 
+const misFechas = new Map();
+misFechas.set(1, 'ENE');
+misFechas.set(2, 'FEB');
+misFechas.set(3, 'MAR');
+misFechas.set(4, 'ABR');
+misFechas.set(5, 'MAY');
+misFechas.set(6, 'JUN');
+misFechas.set(7, 'JUL');
+misFechas.set(8, 'AGO');
+misFechas.set(9, 'SEP');
+misFechas.set(10, 'OCT');
+misFechas.set(11, 'NOV');
+misFechas.set(12, 'DIC');
+
 export default function InfoVuelo({
 	destino,
 	origen,
@@ -23,10 +37,17 @@ export default function InfoVuelo({
 	const departureDate = new Date(fechasalida);
 	const arrivalDate = new Date(fechallegada);
 	const getDateInfo = (fecha) => {
-		return `${fecha.getDate()}/${fecha.getMonth()}/${fecha.getFullYear()}`;
+		const dia = fecha.getDate();
+		const mes = misFechas.get(fecha.getMonth());
+
+		return `${dia}   ${mes}`;
 	};
 	const getTimeInfo = (fecha) => {
 		return `${fecha.getHours()}:${fecha.getMinutes()}`;
+	};
+
+	const processDestiny = (destino) => {
+		return destino.split(',')[0];
 	};
 
 	useEffect(() => {
@@ -36,7 +57,7 @@ export default function InfoVuelo({
 			.catch(() => router.push('/'));
 	}, []);
 
-	if (!user) return null;
+	// if (!user) return null;
 
 	let email_usuario = user.attributes.email;
 	// let email_usuario = 'mateoarteagagiraldo@gmail.com';
@@ -113,17 +134,17 @@ export default function InfoVuelo({
 			>
 				<div className="flex felx-row w-full h-50 bg-gray-100  mt-10 px-5 py-5 justify-between rounded-t-lg ">
 					<div className="flex flex-col items-start">
-						<h1>{getDateInfo(departureDate)}</h1>
+						<h1 className="text-sm">{getDateInfo(departureDate)}</h1>
 						<h1>{origen}</h1>
 						<h1>{getTimeInfo(departureDate)}</h1>
 					</div>
 					<div className=" flex flex-col items-center">
 						<h1>{numerovuelo}</h1>
-						<h1>{description}</h1>
+						<img src="/pruebaViaje.svg" alt="" className="w-60" />
 					</div>
-					<div className="flex flex-col items-end">
-						<h1>{getDateInfo(arrivalDate)}</h1>
-						<h1 className="">{destino}</h1>
+					<div className="flex flex-col items-end justify-end">
+						{/* <h1>{getDateInfo(arrivalDate)}</h1> */}
+						<h1 className="">{processDestiny(destino)}</h1>
 
 						<h1>{getTimeInfo(arrivalDate)}</h1>
 					</div>

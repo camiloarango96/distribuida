@@ -61,7 +61,7 @@ export default function PaginaDestinos(props) {
 			<header className="mt-16 w-full h-full flex flex-col items-center">
 				<CargaDestinos />
 			</header>
-			<main className="flex flex-col w-full h-full mt-2 lg:px-20 xl:px-60">
+			<main className="flex flex-col w-full h-full mt-2 md:px-20 xl:px-56">
 				{destinos.map((element, key) => {
 					return <InfoVuelo key={key} {...element}></InfoVuelo>;
 				})}

@@ -42,17 +42,17 @@ export default function Cart() {
 	};
 
 	useEffect(() => {
-		// Auth.currentAuthenticatedUser()
-		// 	.then((user) => {
-		// 		setUser(user);
-		// 		apiCart(user.attributes.email);
-		// 	})
-		// 	// if there is no authenticated user, redirect to profile page
-		// 	.catch(() => router.push('/'));
-		apiCart('mateoarteagagiraldo@gmail.com');
+		Auth.currentAuthenticatedUser()
+			.then((user) => {
+				setUser(user);
+				apiCart(user.attributes.email);
+			})
+			// if there is no authenticated user, redirect to profile page
+			.catch(() => router.push('/'));
+		// apiCart('mateoarteagagiraldo@gmail.com');
 	}, []);
 
-	// if (!user) return null;
+	if (!user) return null;
 
 	// let email_usuario = user.attributes.email;
 

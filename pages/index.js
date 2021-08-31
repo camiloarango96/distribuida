@@ -6,9 +6,9 @@ const Home = () => {
 	return (
 		<div className={styles.container}>
 			<AmplifySignOut />
-			<h1 className="text-bold text-xl">holis</h1>
-			Hola
-			<Link href="/inicio">Inicio</Link>
+			<Link href="/inicio">
+				<a>Ir a Inicio</a>
+			</Link>
 		</div>
 	);
 };

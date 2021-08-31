@@ -51,6 +51,7 @@ export default function Repuesto({
 		);
 	};
 
+	//user.attributes.email
 	return (
 		<tr className="border-1 border-t border-black ">
 			<td className="text-center">{id}</td>

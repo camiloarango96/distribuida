@@ -49,7 +49,7 @@ export async function getCart(email_usuario) {
 
 export async function getInventory() {
 	const data = await newAxios.get(
-		'http://adb79b373a383495f8006f76bbede4f6-1404650201.us-east-2.elb.amazonaws.com/getInventario'
+		'https://dk85xw7m1k5i0.cloudfront.net/getinventario/getInventario'
 	);
 	return data.data;
 }
@@ -57,7 +57,7 @@ export async function getInventory() {
 export async function addOrder({ cantidad, id, orderedBy }) {
 	console.log(cantidad, id, orderedBy);
 	const data = await newAxios.post(
-		'http://adb79b373a383495f8006f76bbede4f6-1404650201.us-east-2.elb.amazonaws.com/addOrder/',
+		'https://dk85xw7m1k5i0.cloudfront.net/getinventario/addOrder',
 		{
 			cantidad: cantidad,
 			id: id,
